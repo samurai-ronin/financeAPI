@@ -50,5 +50,31 @@ namespace api.test.Unit
         Assert.Equal(400,expected.StatusCode);
         }
 
+        [Fact]
+        public void GetById_WithUnexistingId_ReturnsNotFound()
+        {
+        //Given
+        var id = 1;
+        //When
+        var userController = new UserController(_repoMock.Object,_mapper);
+        _repoMock.Setup( x => x.GetById(It.IsAny<int>())).Returns(() => null);
+        var expected = userController.GetById(id).Result as NotFoundObjectResult;
+        //then
+        expected.Should().BeOfType<NotFoundObjectResult>();
+        }
+
+        [Fact(DisplayName = "Get By Id With Existing Id Returns Ok")]
+        public void GetById_WithExistingId_ReturnsOk()
+        {
+        //Given
+        var id = 1;
+        User user = new(){ name = "userName"};
+        //When
+        var userController = new UserController(_repoMock.Object,_mapper);
+        _repoMock.Setup( x => x.GetById(It.IsAny<int>())).Returns(() => user);
+        var expected = userController.GetById(id).Result as OkObjectResult;
+        //then
+        expected.Should().BeOfType<OkObjectResult>();
+        }
     }
 }
