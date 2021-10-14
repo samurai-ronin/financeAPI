@@ -32,7 +32,7 @@ namespace api.Repositories
             }
         }
 
-        public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+        public IQueryable<TEntity> GetAll()
         {
             try
             {

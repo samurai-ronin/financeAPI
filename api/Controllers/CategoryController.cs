@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using api.Dtos;
 using api.Entities;
 using api.Interfaces;
@@ -34,6 +35,47 @@ namespace api.Controllers
                     return Created("category",Response);
                 }
                 return BadRequest(ModelState);
+            }
+            catch (System.Exception ex)
+            {
+                Response.message=ex.Message;
+                Response.sucess=false;
+                return Response;
+            }
+        }
+
+        [HttpGet("{id:int}")]
+        public ActionResult<response> GetById(int id)
+        {
+            var Response=new response();
+            try
+            {
+                var category = _repository.GetById(id);
+                if (category == null)
+                {
+                    Response.sucess=false;
+                    Response.message="category not found";
+                    return NotFound(Response);
+                }
+                Response.data=_mapper.Map<CategoryOutputModel>(category);
+                return Ok(Response);
+            }
+            catch (System.Exception ex)
+            {
+                Response.message=ex.Message;
+                Response.sucess=false;
+                return Response;
+            }
+        }
+
+        [HttpGet]
+        public ActionResult<response> GetAll()
+        {
+            response Response=new();
+            try
+            {
+                Response.data=_mapper.Map<Collection<CategoryOutputModel>>(_repository.GetAll());
+                return Ok(Response);
             }
             catch (System.Exception ex)
             {
