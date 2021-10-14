@@ -10,6 +10,8 @@ namespace api
         {
             CreateMap<UserInputModel,User>();
             CreateMap<User,UserOutputModel>();
+            CreateMap<CategoryInputModel,Category>();
+            CreateMap<Category,CategoryOutputModel>();
         }
     }
 }

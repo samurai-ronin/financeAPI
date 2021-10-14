@@ -33,6 +33,7 @@ namespace api
             services.AddDbContext<FinanceContext>(opt => opt.UseInMemoryDatabase("Finance"));
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<IUserRepository,UserRepository>();
+            services.AddTransient<ICategoryRepository,CategoryRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
