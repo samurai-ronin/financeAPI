@@ -73,7 +73,7 @@ namespace api.test.Unit
         List<Category> listCategory = new(){
             new Category(){Id = 1,Name = "category1"},
             new Category(){Id = 2,Name = "category2"},
-            new Category(){Id = 2,Name = "category3"},
+            new Category(){Id = 3,Name = "category3"},
         };
         Category category = new(){Id = 1,Name = "category"};
         _repoMock.Setup(x => x.GetAll()).Returns(listCategory.AsQueryable());

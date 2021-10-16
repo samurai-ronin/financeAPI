@@ -12,6 +12,8 @@ namespace api
             CreateMap<User,UserOutputModel>();
             CreateMap<CategoryInputModel,Category>();
             CreateMap<Category,CategoryOutputModel>();
+            CreateMap<AccountInputModel,Account>();
+            CreateMap<Account,AccountOutputModel>();
         }
     }
 }

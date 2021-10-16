@@ -34,6 +34,7 @@ namespace api
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<IUserRepository,UserRepository>();
             services.AddTransient<ICategoryRepository,CategoryRepository>();
+            services.AddTransient<IAccountRepository,AccountRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

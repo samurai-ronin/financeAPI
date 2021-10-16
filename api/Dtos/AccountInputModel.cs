@@ -1,14 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace api.Entities
+namespace api.Dtos
 {
-    public class Account
+    public class AccountInputModel
     {
-        [Key]
-        public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Type { get; set; }
         public decimal Balance { get; set; }
+        [Required]
         public int UserId { get; set; }
     }
 }
