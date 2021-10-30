@@ -35,6 +35,7 @@ namespace api
             services.AddTransient<IUserRepository,UserRepository>();
             services.AddTransient<ICategoryRepository,CategoryRepository>();
             services.AddTransient<IAccountRepository,AccountRepository>();
+            services.AddTransient<ITransactionRepository,TransactionRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
