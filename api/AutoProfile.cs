@@ -15,6 +15,7 @@ namespace api
             CreateMap<AccountInputModel,Account>();
             CreateMap<Account,AccountOutputModel>();
             CreateMap<TransactionInputModel,Transaction>();
+            CreateMap<Transaction,TransactionOutputModel>();
         }
     }
 }

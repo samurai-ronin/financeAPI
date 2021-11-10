@@ -66,5 +66,22 @@ namespace api.Controllers
             }
         }
 
+        [HttpGet("{id:int}")]
+        public ActionResult<response> GetByAccount(int id)
+        {
+            response Response =new();
+            try
+            {
+                Response.message = $"all transaction from account {id}";
+                Response.data = _mapper.Map<Collection<TransactionOutputModel>>(_repository.GetAll().Include(x =>x.account).Where(x => x.accountId==id).ToList());
+                return Ok(Response);
+            }
+            catch (System.Exception ex)
+            {
+                Response.message=ex.Message;
+                Response.sucess=false;
+                return Response;
+            }
+        }
     }
 }
