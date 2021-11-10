@@ -1,9 +1,12 @@
+using System.Collections.ObjectModel;
+using System.Linq;
 using api.Dtos;
 using api.Entities;
 using api.Interfaces;
 using api.Response;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
@@ -37,6 +40,7 @@ namespace api.Controllers
                         Response.sucess = false;
                         return Ok(Response);
                     }
+                    transaction.PreviousBalance = account.Balance;
                     switch (transaction.transactionType)
                     {
                         case Enums.TransactionType.Expense:
@@ -46,6 +50,7 @@ namespace api.Controllers
                             account.Balance += transaction.Amount;
                         break;
                     }
+                    transaction.Balance = account.Balance;
                     _repositoryAccount.Update(account);
                     _repository.Insert(transaction);
                     Response.message="transaction created";
@@ -60,5 +65,6 @@ namespace api.Controllers
                 return Response;
             }
         }
+
     }
 }
