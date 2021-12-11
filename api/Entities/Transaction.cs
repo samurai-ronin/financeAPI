@@ -15,6 +15,8 @@ namespace api.Entities
         public decimal Amount { get; set; }
         public int accountId { get; set; }
         public Account account { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
     }
 }

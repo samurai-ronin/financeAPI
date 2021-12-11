@@ -49,6 +49,9 @@ namespace api.Controllers
                         case Enums.TransactionType.Revenues:
                             account.Balance += transaction.Amount;
                         break;
+                        case Enums.TransactionType.Transfer:
+                            account.Balance -= transaction.Amount;
+                        break;
                     }
                     transaction.Balance = account.Balance;
                     _repositoryAccount.Update(account);

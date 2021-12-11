@@ -13,5 +13,8 @@ namespace api.Dtos
         public decimal Amount { get; set; }
         [Required]
         public int accountId { get; set; }
+        [Required]
+        public int CategoryId { get; set; }
+
     }
 }
