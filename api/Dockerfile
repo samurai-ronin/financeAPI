@@ -1,17 +1,19 @@
-# syntax=docker/dockerfile:1
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /src
+COPY . .
+RUN dotnet restore 
+RUN dotnet build --no-restore -c Release -o /app
 
-# Copy everything else and build
-COPY ../ ./
-RUN dotnet publish -c Release -o out
+FROM build AS publish
+RUN dotnet publish --no-restore -c Release -o /app
 
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
+FROM base AS final
 WORKDIR /app
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "api.dll"]
+COPY --from=publish /app .
+# Padrão de container ASP.NET
+# ENTRYPOINT ["dotnet", "api.dll"]
+# Opção utilizada pelo Heroku
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet api.dll
